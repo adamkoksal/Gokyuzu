@@ -13,13 +13,12 @@
 
         <q-toolbar-title>
           <div class="q-pt-sm">
-            <img class="" src="icons/yazi.png" style="height: auto; width: 118px" />
-            <!-- <img class="logo-sm" src="icons/logo.png" style="height: auto; width: 100px" /> -->
+            <img src="icons/yazi.png" style="height: auto; width: 118px" />
           </div>
         </q-toolbar-title>
 
         <settings />
-        <q-btn color="primary" text-color="white" icon="logout" flat stretch>
+        <q-btn to="/login" color="primary" text-color="white" icon="logout" flat stretch>
           <q-tooltip anchor="bottom left">Oturumu Kapat</q-tooltip>
         </q-btn>
       </q-toolbar>
@@ -27,7 +26,7 @@
 
 
     <q-drawer
-      class="bg-dark text-white"
+      class="drawer text-white"
       v-model="leftDrawerOpen"
       show-if-above
       elevated
@@ -138,6 +137,13 @@ export default defineComponent({
     rgb(5, 69, 84) 5%,
     rgb(22, 104, 122) 30%,
     rgb(77, 168, 189) 90%
+  );
+}
+.drawer {
+  background: linear-gradient(
+    160deg,
+    rgb(8, 39, 66) 60%,
+    rgb(12, 85, 102) 100%
   );
 }
 </style>

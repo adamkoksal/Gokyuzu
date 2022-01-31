@@ -1,13 +1,18 @@
 <template>
-  <q-page class="flex flex-center">
-    <div>Student</div>
+  <q-page class="flex-center q-pa-md">
+    <data-table />
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
+import DataTable from 'src/components/data-table.vue'
 
 export default defineComponent({
-  name: 'student'
+  name: 'student',
+
+  components: {
+    DataTable,
+  }
 })
 </script>

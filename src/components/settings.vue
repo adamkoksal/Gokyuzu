@@ -60,7 +60,7 @@ import { defineComponent } from 'vue';
 import { notify, validate } from '../utility'
 
 export default defineComponent({
-  name: 'potential',
+  name: 'settings',
 
   data() {
     return {
