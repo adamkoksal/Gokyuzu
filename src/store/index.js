@@ -17,6 +17,23 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       // example
     },
+    state () {
+      return {
+        sessionId: null,
+        sessionKeys: [],
+      }
+    },
+    mutations: {
+      setSessionId (state, val) {
+        state.sessionId = val
+      },
+      setSessionKeys (state, val) {
+        state.sessionKeys = val
+      }
+    },
+    getters: {
+      getSessionId: (state) => state.sessionId 
+    },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

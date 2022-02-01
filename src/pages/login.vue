@@ -4,11 +4,19 @@
       <q-page class="flex flex-center">
         <q-card class="login-form" style="width: 30%">
           <div class="row justify-center q-pa-md">
-            <q-img src="/icons/gokyuzu.png" style="height: auto; width: 200px"></q-img>
+            <q-img
+              src="/icons/gokyuzu.png"
+              style="height: auto; width: 200px"
+            ></q-img>
           </div>
           <q-card-section>
-            <q-form class="q-gutter-md q-pa-md">
-              <q-input filled v-model="username" label="Kullanıcı" :rules="[required]"/>
+            <q-form class="q-gutter-md q-pa-md" @submit="login">
+              <q-input
+                filled
+                v-model="username"
+                label="Kullanıcı"
+                :rules="[required]"
+              />
               <q-input
                 type="password"
                 filled
@@ -16,13 +24,16 @@
                 label="Şifre"
                 :rules="[required]"
               />
-              <div>
+              <div class="row justify-between">
                 <q-btn
-                  label="Login"
-                  to="/student"
-                  type="submit"
-                  color="teal"
+                  flat
+                  color="primary"
+                  label="Şifremi unuttum"
+                  dense
+                  no-caps
+                  @click="forgotPass"
                 />
+                <q-btn label="Login" type="submit" color="secondary" />
               </div>
             </q-form>
           </q-card-section>
@@ -33,24 +44,71 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { notify, validate } from '../utility'
+import axios from "axios";
+import { defineComponent } from "vue";
+import { notify, validate } from "../utility";
+
+// TODO
+const url = "https://92.44.44.111:3443/gybo/api/auth/";
 
 export default defineComponent({
-  name: 'settings',
+  name: "settings",
 
   data() {
     return {
       username: null,
       password: null,
-    }
+    };
   },
 
   methods: {
     required: (val) => validate.required(val),
-    onSubmit () {
-      notify.success("Success")
-    }
-  }
-})
+    login() {
+      const data = {
+        envelope: {
+          uniquekey: {
+            talentName: "HardedSoft",
+            customerName: "HardedSoft",
+            userName: this.username,
+          },
+          action: "login",
+        },
+        body: { password: this.password },
+      };
+      axios.put(url, JSON.stringify(data)).then(({ data }) => {
+        if (data.envelope.message.succeed === true) {
+          notify.success("Success");
+          this.$store.commit("setSessionId", data.body.content.sessionId);
+          this.$store.commit("setSessionKeys", data.body.content.keys);
+          this.$router.push({ name: "student" })
+        } else {
+          // TODO
+          notify.error("Error");
+        }
+      });
+    },
+    forgotPass() {
+      const data = {
+        envelope: {
+          uniquekey: {
+            talentName: "HardedSoft",
+            customerName: "HardedSoft",
+            userName: this.username,
+          },
+          action: "resetPassword",
+        },
+        body: {},
+      };
+      axios.put(url, JSON.stringify(data)).then(({ data }) => {
+        if (data.envelope.message.succeed === true) {
+          // TODO
+          notify.success("Success");
+        } else {
+          // TODO
+          notify.error("Error");
+        }
+      });
+    },
+  },
+});
 </script>
