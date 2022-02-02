@@ -1,5 +1,6 @@
-import { store } from 'quasar/wrappers'
-import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate";
+import { createStore } from "vuex";
+import { store } from "quasar/wrappers";
 
 // import example from './module-example'
 
@@ -12,33 +13,48 @@ import { createStore } from 'vuex'
  * with the Store instance.
  */
 
+const getDefaultState = () => {
+  return {
+    sessionId: null,
+    sessionKeys: [],
+    user: null,
+  };
+};
+
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
-    modules: {
-      // example
+    plugins: [
+      createPersistedState()
+    ],
+
+    state() {
+      return getDefaultState();
     },
-    state () {
-      return {
-        sessionId: null,
-        sessionKeys: [],
-      }
-    },
+
     mutations: {
-      setSessionId (state, val) {
-        state.sessionId = val
+      setSessionId(state, val) {
+        state.sessionId = val;
       },
-      setSessionKeys (state, val) {
-        state.sessionKeys = val
-      }
+      setSessionKeys(state, val) {
+        state.sessionKeys = val;
+      },
+      setUserData(state, val) {
+        state.user = val;
+      },
+      resetState(state) {
+        Object.assign(state, getDefaultState());
+      },
     },
+    
     getters: {
-      getSessionId: (state) => state.sessionId 
+      sessionId: (state) => state.sessionId,
+      user: (state) => state.user,
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING
-  })
+    strict: process.env.DEBUGGING,
+  });
 
-  return Store
-})
+  return Store;
+});

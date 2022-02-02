@@ -1,8 +1,8 @@
-const isLoggedIn = () => {
-  return true
+const isLoggedIn = (store) => {
+  return store.getters.sessionId
 };
 
-const routes = [
+const routes = (store) => [
   {
     path: "/",
     redirect: { name: "student" },
@@ -13,7 +13,7 @@ const routes = [
         name: "student",
         component: () => import("src/pages/student.vue"),
         beforeEnter: (to, from, next) => {
-          isLoggedIn() ? next() : next(`/login`)
+          isLoggedIn(store) ? next() : next("/login")
         }
       },
       {
@@ -21,7 +21,7 @@ const routes = [
         name: "parent",
         component: () => import("src/pages/parent.vue"),
         beforeEnter: (to, from, next) => {
-          isLoggedIn() ? next() : next(`/login`)
+          isLoggedIn(store) ? next() : next("/login")
         }
       },
       {
@@ -29,7 +29,7 @@ const routes = [
         name: "potential",
         component: () => import("src/pages/potential.vue"),
         beforeEnter: (to, from, next) => {
-          isLoggedIn() ? next() : next(`/login`)
+          isLoggedIn(store) ? next() : next("/login")
         }
       },
     ],
@@ -38,6 +38,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("pages/login.vue"),
+    beforeEnter: (to, from, next) => {
+      isLoggedIn(store) ? next("/") : next()
+    }
   },
 
   // Always leave this as last one,
@@ -48,4 +51,4 @@ const routes = [
   },
 ];
 
-export default routes;
+export default (store) => routes (store)

@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-page-container class="header">
+    <q-page-container class="login-background">
       <q-page class="flex flex-center">
         <q-card class="login-form" style="width: 30%">
           <div class="row justify-center q-pa-md">
@@ -80,6 +80,7 @@ export default defineComponent({
           notify.success("Success");
           this.$store.commit("setSessionId", data.body.content.sessionId);
           this.$store.commit("setSessionKeys", data.body.content.keys);
+          this.$store.commit("setUserData", data.body.content.personal);
           this.$router.push({ name: "student" })
         } else {
           // TODO
@@ -112,3 +113,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.login-background {
+  background: linear-gradient(
+    145deg,
+    rgb(5, 69, 84) 5%,
+    rgb(22, 104, 122) 30%,
+    rgb(77, 168, 189) 90%
+  );
+}
+</style>

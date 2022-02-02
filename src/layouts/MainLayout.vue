@@ -18,7 +18,7 @@
         </q-toolbar-title>
 
         <settings />
-        <q-btn to="/login" color="primary" text-color="white" icon="logout" flat stretch>
+        <q-btn color="primary" text-color="white" icon="logout" flat stretch @click="logout">
           <q-tooltip anchor="bottom left">Oturumu Kapat</q-tooltip>
         </q-btn>
       </q-toolbar>
@@ -37,7 +37,7 @@
         <div style="padding:15px;">
           <q-toolbar>
             <q-icon size='md' name="mdi-account-circle"/>
-            <q-toolbar-title>Abdurrahman Köksal</q-toolbar-title>
+            <q-toolbar-title>{{ username }}</q-toolbar-title>
           </q-toolbar>
           <hr />
           <q-list padding>
@@ -111,6 +111,13 @@ export default defineComponent({
     Settings
   },
 
+  computed: {
+    username () {
+      const { name, surname } = this.$store.getters.user
+      return name + " " + surname
+    }
+  },
+
   setup () {
     const leftDrawerOpen = ref(false)
 
@@ -119,6 +126,12 @@ export default defineComponent({
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit("resetState")
+      this.$router.push({ name: "login" })
     }
   }
 })
