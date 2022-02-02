@@ -48,6 +48,12 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
+      env: {
+        API: ctx.dev
+          ? "https://92.44.44.111:3443/gybo/api/"
+          : "PROD API" // TODO
+      },
+
       // transpile: false,
       // publicPath: '/',
 
@@ -79,7 +85,7 @@ module.exports = configure(function (ctx) {
         type: 'http'
       },
       port: 8081,
-      open: true // opens browser window automatically
+      open: false // opens browser window automatically
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

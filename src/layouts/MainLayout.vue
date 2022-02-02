@@ -113,8 +113,7 @@ export default defineComponent({
 
   computed: {
     username () {
-      const { name, surname } = this.$store.getters.user
-      return name + " " + surname
+      return this.$store.getters.user?.name + " " + this.$store.getters.user?.surname
     }
   },
 

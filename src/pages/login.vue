@@ -49,7 +49,7 @@ import { defineComponent } from "vue";
 import { notify, validate } from "../utility";
 
 // TODO
-const url = "https://92.44.44.111:3443/gybo/api/auth/";
+const url = process.env.API + "auth/";
 
 export default defineComponent({
   name: "settings",
