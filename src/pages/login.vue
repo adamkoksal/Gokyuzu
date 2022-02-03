@@ -64,13 +64,14 @@ export default defineComponent({
   methods: {
     required: (val) => validate.required(val),
     login() {
+      const uniquekey = {
+        talentName: "HardedSoft",
+        customerName: "HardedSoft",
+        userName: this.username,
+      }
       const data = {
         envelope: {
-          uniquekey: {
-            talentName: "HardedSoft",
-            customerName: "HardedSoft",
-            userName: this.username,
-          },
+          uniquekey, 
           action: "login",
         },
         body: { password: this.password },
@@ -81,6 +82,7 @@ export default defineComponent({
           this.$store.commit("setSessionId", data.body.content.sessionId);
           this.$store.commit("setSessionKeys", data.body.content.keys);
           this.$store.commit("setUserData", data.body.content.personal);
+          this.$store.commit("setUniqueKey", uniquekey);
           this.$router.push({ name: "student" })
         } else {
           // TODO

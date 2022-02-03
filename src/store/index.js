@@ -18,6 +18,7 @@ const getDefaultState = () => {
     sessionId: null,
     sessionKeys: [],
     user: null,
+    uniquekey: {},
   };
 };
 
@@ -41,6 +42,9 @@ export default store(function (/* { ssrContext } */) {
       setUserData(state, val) {
         state.user = val;
       },
+      setUniqueKey(state, val) {
+        state.uniquekey = val;
+      },
       resetState(state) {
         Object.assign(state, getDefaultState());
       },
@@ -49,6 +53,7 @@ export default store(function (/* { ssrContext } */) {
     getters: {
       sessionId: (state) => state.sessionId,
       user: (state) => state.user,
+      uniquekey: (state) => state.uniquekey,
     },
 
     // enable strict mode (adds overhead!)
