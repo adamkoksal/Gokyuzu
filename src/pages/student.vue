@@ -1,7 +1,8 @@
 <template>
   <q-page class="flex-center q-pa-md">
+    <student-modal v-model:is-open="isModalOpen" :student-id="selectedStudentId"></student-modal>
     <q-table
-      class="q-pa-md"
+      class="q-pa-md cursor-pointer"
       :rows="rows"
       :columns="columns"
       :loading="loading"
@@ -9,6 +10,7 @@
       :pagination-label="() => `${pagination.page} - ${pageCount}`"
       v-model:pagination="pagination"
       @request="onRequest"
+      @row-click="onRowClick"
     >
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
@@ -32,6 +34,7 @@
 </template>
 
 <script>
+import StudentModal from "../components/student-modal.vue";
 import axios from "axios";
 import { defineComponent } from "vue";
 import { notify } from "../utility";
@@ -49,6 +52,10 @@ const columns = [
 
 export default defineComponent({
   name: "student",
+
+  components: {
+    StudentModal
+  },
 
   created() {
     this.getData();
@@ -68,6 +75,8 @@ export default defineComponent({
       loading: true,
       search: "",
       pageCount: 0,
+      isModalOpen: false,
+      selectedStudentId: null,
       pagination: {
         page: 1,
         rowsPerPage: 4,
@@ -84,6 +93,7 @@ export default defineComponent({
       return this.$store.getters.uniquekey;
     },
   },
+
   methods: {
     async getData() {
       this.loading = true;
@@ -106,7 +116,7 @@ export default defineComponent({
             data.envelope.paging.rowCount * data.envelope.paging.pageCount;
           this.pageCount = data.envelope.paging.pageCount;
         } else {
-          notify.error(data.envelope.message.detail);
+          notify.error(data?.envelope?.message?.detail);
         }
       });
       function timeout(ms) {
@@ -115,10 +125,16 @@ export default defineComponent({
       await timeout(400);
       this.loading = false;
     },
+
     onRequest(props) {
       this.pagination.page = props.pagination.page;
       this.getData();
     },
+
+    onRowClick(event, row) {
+      this.selectedStudentId = row.ogrenciId;
+      this.isModalOpen = true;
+    }
   },
 });
 </script>

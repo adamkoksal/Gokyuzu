@@ -16,7 +16,7 @@ import { store } from "quasar/wrappers";
 const getDefaultState = () => {
   return {
     sessionId: null,
-    sessionKeys: [],
+    sessionKeys: [], // TODO remove keys
     user: null,
     uniquekey: {},
   };

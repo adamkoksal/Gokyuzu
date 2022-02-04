@@ -118,10 +118,10 @@ export default defineComponent({
         body: { password: this.password },
       };
       axios.put(url, JSON.stringify(data)).then(({ data }) => {
-        if (data.envelope.message.succeed === true) {
+        if (data?.envelope?.message?.succeed === true) {
           notify.success("Şifre başarıyla değiştirildi");
         } else {
-          notify.error(data.envelope.message.detail);
+          notify.error(data?.envelope?.message?.detail);
         }
       });
     },
