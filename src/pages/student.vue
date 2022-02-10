@@ -1,6 +1,9 @@
 <template>
   <q-page class="flex-center q-pa-md">
-    <student-modal v-model:is-open="isModalOpen" :student-id="selectedStudentId"></student-modal>
+    <student-modal
+      v-model:is-open="isModalOpen"
+      :student-id="selectedStudentId"
+    ></student-modal>
     <q-table
       class="q-pa-md cursor-pointer"
       :rows="rows"
@@ -14,6 +17,20 @@
     >
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
+      </template>
+      <template v-slot:top-left>
+        <q-btn
+          class="text-white"
+          icon="mdi-account-plus"
+          padding="sm"
+          rounded
+          no-caps
+          dense
+          color="secondary"
+          @click="createStudent"
+        >
+          <q-tooltip>Öğrenci Ekle</q-tooltip>
+        </q-btn>
       </template>
       <template v-slot:top-right>
         <q-input
@@ -34,7 +51,7 @@
 </template>
 
 <script>
-import StudentModal from "../components/student-modal.vue";
+import StudentModal from "../components/student-modal/student-modal.vue";
 import axios from "axios";
 import { defineComponent } from "vue";
 import { notify } from "../utility";
@@ -42,19 +59,55 @@ import { notify } from "../utility";
 const url = process.env.API;
 
 const columns = [
-  { name: "ad", label: "Ad", field: "ad", align: "left", headerStyle: `width: 20%` },
-  { name: "soyad", label: "Soyad", field: "soyad", align: "left", headerStyle: `width: 20%` },
-  { name: "okul", label: "Okul", field: "okul", align: "left", headerStyle: `width: 20%` },
-  { name: "no", label: "No", field: "no", align: "left", headerStyle: `width: 15%` },
-  { name: "sinif", label: "Sınıf", field: "sinif", align: "left", headerStyle: `width: 12%` },
-  { name: "statu", label: "Statü", field: "statu", align: "left", headerStyle: `width: 12%` },
+  {
+    name: "ad",
+    label: "Ad",
+    field: "ad",
+    align: "left",
+    headerStyle: `width: 20%`,
+  },
+  {
+    name: "soyad",
+    label: "Soyad",
+    field: "soyad",
+    align: "left",
+    headerStyle: `width: 20%`,
+  },
+  {
+    name: "okul",
+    label: "Okul",
+    field: "okul",
+    align: "left",
+    headerStyle: `width: 20%`,
+  },
+  {
+    name: "no",
+    label: "No",
+    field: "no",
+    align: "left",
+    headerStyle: `width: 15%`,
+  },
+  {
+    name: "sinif",
+    label: "Sınıf",
+    field: "sinif",
+    align: "left",
+    headerStyle: `width: 12%`,
+  },
+  {
+    name: "statu",
+    label: "Statü",
+    field: "statu",
+    align: "left",
+    headerStyle: `width: 12%`,
+  },
 ];
 
 export default defineComponent({
   name: "student",
 
   components: {
-    StudentModal
+    StudentModal,
   },
 
   created() {
@@ -133,6 +186,11 @@ export default defineComponent({
 
     onRowClick(event, row) {
       this.selectedStudentId = row.ogrenciId;
+      this.isModalOpen = true;
+    },
+
+    createStudent() {
+      this.selectedStudentId = null;
       this.isModalOpen = true;
     }
   },
