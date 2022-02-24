@@ -52,7 +52,7 @@
               <student-tab :studentId="studentId" @update-edit="onUpdateEdit" />
             </q-tab-panel>
             <q-tab-panel name="parent">
-              <div class="text-h6 q-mb-xl">Parent</div>
+              <parent-tab :studentId="studentId" />
             </q-tab-panel>
             <q-tab-panel name="address">
               <div class="text-h6 q-mb-xl">Address</div>
@@ -67,12 +67,14 @@
 <script>
 import { defineComponent } from "vue";
 import StudentTab from "./tabs/student.vue";
+import ParentTab from "./tabs/parent.vue";
 
 export default defineComponent({
   name: "student-modal",
 
   components: {
     StudentTab,
+    ParentTab,
   },
 
   props: {
