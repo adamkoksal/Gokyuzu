@@ -4,7 +4,7 @@
     @update:modelValue="$emit('update:is-open', false)"
     persistent
   >
-    <q-card style="width: 5500px">
+    <q-card style="min-width: 800px">
       <q-bar class="header text-white">
         <q-icon name="mdi-information" />
         <q-space />
@@ -13,7 +13,7 @@
         <q-btn icon="close" flat dense v-close-popup :disable="canEdit" />
       </q-bar>
 
-      <q-splitter v-model="splitterModel" style="height: 450px">
+      <q-splitter v-model="splitterModel" style="height: 650px">
         <template v-slot:before>
           <q-tabs v-model="tab" vertical class="text-teal">
             <q-tab

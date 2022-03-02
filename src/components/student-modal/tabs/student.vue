@@ -41,19 +41,16 @@
         v-model="student.ad"
         label="Ad"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         :rules="[required]"
-
       />
       <q-input
         class="on-right"
         v-model="student.soyad"
         label="Soyad"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         :rules="[required]"
       />
@@ -64,8 +61,7 @@
         label="TC No"
         type="number"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         :rules="[required]"
       />
@@ -75,22 +71,20 @@
         label="Doğum Tarihi"
         type="date"
         :readonly="!canEdit"
-        style="width: 200px"
+        style="width: 300px"
         stack-label
-        dense
         outlined
         :rules="[required]"
       />
     </div>
-    <div class="row no-wrap">
+    <div class="row no-wrap q-mb-lg">
       <div class="col">
         <q-select
           v-model="student.okul"
           :options="okulOptions"
           :readonly="!canEdit"
           label="Okul"
-          style="width: 200px"
-          dense
+          style="width: 300px"
           outlined
           options-dense
           emit-value
@@ -104,8 +98,7 @@
             :options="subeOptions"
             :readonly="!canEdit"
             label="Şube"
-            style="width: 100px"
-            dense
+            style="width: 150px"
             outlined
             options-dense
             emit-value
@@ -116,22 +109,20 @@
             label="Okul No"
             type="number"
             :readonly="!canEdit"
-            style="width: 100px"
+            style="width: 150px"
             maxlength="5"
-            dense
             outlined
           />
         </div>
       </div>
     </div>
-    <div class="row no-wrap">
+    <div class="row no-wrap q-mb-lg">
       <q-select
         v-model="student.sinif"
         :options="sinifOptions"
         :readonly="!canEdit"
         label="Sınıf"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         options-dense
         emit-value
@@ -142,20 +133,18 @@
         :options="statuOptions"
         label="Statü"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         options-dense
         emit-value
       />
     </div>
-    <div class="row no-wrap">
+    <div class="row no-wrap q-mb-lg">
       <q-input
         v-model="student.detail.email"
         label="Email"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
       />
       <q-input
@@ -163,8 +152,7 @@
         v-model="student.detail.phone"
         label="Telefon"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         mask="(###) ### ## ##"
       />
@@ -174,8 +162,7 @@
         v-model="student.detail.lgs"
         label="LGS Puanı"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         mask="###.###"
       />
@@ -185,8 +172,7 @@
         :options="servisOptions"
         label="Servis Durumu"
         :readonly="!canEdit"
-        style="width: 200px"
-        dense
+        style="width: 300px"
         outlined
         options-dense
         emit-value
