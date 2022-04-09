@@ -132,7 +132,7 @@ export default defineComponent({
       selectedStudentId: null,
       pagination: {
         page: 1,
-        rowsPerPage: 4,
+        rowsPerPage: 15,
         rowsNumber: 20,
       },
     };

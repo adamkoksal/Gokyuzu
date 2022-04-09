@@ -298,7 +298,6 @@ export default defineComponent({
       };
       axios.put(url, JSON.stringify(data)).then(({ data }) => {
         if (data?.envelope?.message?.succeed === true) {
-          // console.log(data);
           this.student = data.body.content;
           // TODO emit name here so we can display it on dialog title
         } else {

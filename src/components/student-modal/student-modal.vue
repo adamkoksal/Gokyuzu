@@ -17,6 +17,12 @@
         <template v-slot:before>
           <q-tabs v-model="tab" vertical class="text-teal">
             <q-tab
+              name="summary"
+              icon="mdi-school"
+              label="Özet"
+              no-caps
+            ></q-tab>
+            <q-tab
               name="student"
               icon="mdi-school"
               label="Öğrenci"
@@ -48,6 +54,9 @@
             transition-prev="jump-up"
             transition-next="jump-up"
           >
+            <q-tab-panel name="summary">
+              <summary-tab :studentId="studentId" />
+            </q-tab-panel>
             <q-tab-panel name="student">
               <student-tab :studentId="studentId" @update-edit="onUpdateEdit" />
             </q-tab-panel>
@@ -66,6 +75,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import SummaryTab from "./tabs/summary.vue";
 import StudentTab from "./tabs/student.vue";
 import ParentTab from "./tabs/parent.vue";
 
@@ -73,6 +83,7 @@ export default defineComponent({
   name: "student-modal",
 
   components: {
+    SummaryTab,
     StudentTab,
     ParentTab,
   },
@@ -90,7 +101,7 @@ export default defineComponent({
 
   data() {
     return {
-      tab: "student",
+      tab: "summary",
       splitterModel: 20,
       canEdit: false,
     };
