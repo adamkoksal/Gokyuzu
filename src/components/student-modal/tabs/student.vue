@@ -88,6 +88,7 @@
           outlined
           options-dense
           emit-value
+          map-options
         />
       </div>
       <div class="col">
@@ -102,6 +103,7 @@
             outlined
             options-dense
             emit-value
+            map-options
           />
           <q-input
             class="on-right"
@@ -126,6 +128,7 @@
         outlined
         options-dense
         emit-value
+        map-options
       />
       <q-select
         class="on-right"
@@ -137,6 +140,7 @@
         outlined
         options-dense
         emit-value
+        map-options
       />
     </div>
     <div class="row no-wrap q-mb-lg">
@@ -176,6 +180,7 @@
         outlined
         options-dense
         emit-value
+        map-options
       />
     </div>
   </q-form>
@@ -190,6 +195,8 @@ const url = process.env.API;
 
 export default defineComponent({
   name: "student-tab",
+
+  emits: ["updateEdit"],
 
   props: {
     studentId: { type: Number, default: null },

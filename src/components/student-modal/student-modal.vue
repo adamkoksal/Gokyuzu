@@ -21,12 +21,14 @@
               icon="mdi-school"
               label="Özet"
               no-caps
+              :disable="canEdit || !studentId"
             ></q-tab>
             <q-tab
               name="student"
               icon="mdi-school"
               label="Öğrenci"
               no-caps
+              :disable="canEdit || !studentId"
             ></q-tab>
             <q-tab
               name="parent"
@@ -61,7 +63,7 @@
               <student-tab :studentId="studentId" @update-edit="onUpdateEdit" />
             </q-tab-panel>
             <q-tab-panel name="parent">
-              <parent-tab :studentId="studentId" />
+              <parent-tab :studentId="studentId" @update-edit="onUpdateEdit" />
             </q-tab-panel>
             <q-tab-panel name="address">
               <div class="text-h6 q-mb-xl">Address</div>
@@ -93,15 +95,23 @@ export default defineComponent({
     studentId: { type: Number, default: null },
   },
 
+  // created() {
+  //   console.log(this.studentId)
+  //   if (this.studentId) this.tab = "summary";
+  // },
+
   watch: {
     isOpen(val) {
       if (!val) Object.assign(this.$data, this.$options.data());
     },
+    studentId(val) {
+      if (val) this.tab = "summary";
+    }
   },
 
   data() {
     return {
-      tab: "summary",
+      tab: "student",
       splitterModel: 20,
       canEdit: false,
     };
